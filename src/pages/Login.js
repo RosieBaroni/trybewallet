@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { userEmail } from '../actions';
+import './login.css';
 
 class Login extends React.Component {
   state = {
@@ -26,7 +27,8 @@ class Login extends React.Component {
 
     if (email.includes('@')
       && email.includes('.com')
-      && password.length >= minPassLength) {
+      && password.length >= minPassLength
+    ) {
       this.setState({
         isDisabled: false,
       });
@@ -55,46 +57,53 @@ class Login extends React.Component {
     } = this.state;
 
     return (
-      <div data-testid="page-login">
+      <main className="container">
+        <div className="content" data-testid="page-login">
 
-        <h1>TRYBE</h1>
+          <h1>TRYBE</h1>
 
-        <input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Digite seu email"
-          data-testid="email-input"
-          value={ email }
-          onChange={ this.onInputChange }
-          required
-        />
+          <form className="form-login">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Digite seu email"
+              data-testid="email-input"
+              value={ email }
+              onChange={ this.onInputChange }
+              required
+            />
 
-        <input
-          type="password"
-          id="password"
-          name="password"
-          data-testid="password-input"
-          value={ password }
-          onChange={ this.onInputChange }
-          required
-        />
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Digite sua senha"
+              data-testid="password-input"
+              value={ password }
+              onChange={ this.onInputChange }
+              required
+            />
 
-        <button
-          type="button"
-          disabled={ isDisabled }
-          onClick={ this.onButtonClick }
-        >
-          Entrar
-        </button>
-      </div>
+            <button
+              type="button"
+              disabled={ isDisabled }
+              onClick={ this.onButtonClick }
+            >
+              Entrar
+            </button>
+          </form>
+        </div>
+      </main>
     );
   }
 }
 
 Login.propTypes = {
   saveUserEmail: PropTypes.func.isRequired,
-  history: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
