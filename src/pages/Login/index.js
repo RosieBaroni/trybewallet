@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { userEmail } from '../actions';
-import './login.css';
+import { getEmail } from '../../actions';
+import './styles.css';
 
 class Login extends React.Component {
   state = {
@@ -42,10 +42,11 @@ class Login extends React.Component {
   }
 
   onButtonClick = () => {
-    const { history, saveUserEmail } = this.props;
+    const { history, getEmailDispatch } = this.props;
     const { email } = this.state;
 
-    saveUserEmail(email);
+    getEmailDispatch(email);
+
     history.push('/carteira');
   }
 
@@ -60,7 +61,7 @@ class Login extends React.Component {
       <main className="container">
         <div className="content" data-testid="page-login">
 
-          <h1>TRYBE</h1>
+          <h1>TRYBE-WALLET</h1>
 
           <form className="form-login">
             <input
@@ -100,14 +101,14 @@ class Login extends React.Component {
 }
 
 Login.propTypes = {
-  saveUserEmail: PropTypes.func.isRequired,
+  getEmailDispatch: PropTypes.func.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  saveUserEmail: (email) => dispatch(userEmail(email)),
+  getEmailDispatch: (email) => dispatch(getEmail(email)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);
