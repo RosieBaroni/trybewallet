@@ -60,8 +60,7 @@ class Login extends React.Component {
     return (
       <main className="container">
         <div className="content" data-testid="page-login">
-
-          <h1>TRYBE-WALLET</h1>
+          <h1>Trybe Wallet</h1>
 
           <form className="form-login">
             <input

@@ -2,18 +2,32 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-// import './styles.css';
-
 class Header extends React.Component {
   state = {
-    expenses: 0,
+    totalExpenses: 0,
   }
+
+  componentDidMount() {
+    this.sumTotalExpense();
+  }
+
+  sumTotalExpense = () => {
+    const { expenses } = this.props;
+
+    const totalExpenses = expenses?.reduce((acc, item) => {
+      const { value, currency, exchangeRates } = item;
+
+      acc += value * (exchangeRates[currency].ask);
+
+      return acc;
+    }, 0);
+
+    this.setState({ totalExpenses: totalExpenses || 0 });
+  };
 
   render() {
     const { user } = this.props;
-    const { expenses } = this.state;
-
-    // const sum = expenses?.reduce((acc, current) => acc + current, 0);
+    const { totalExpenses } = this.state;
 
     return (
       <header>
@@ -24,7 +38,7 @@ class Header extends React.Component {
 
         <p data-testid="total-field">
           Despesas Total:
-          {expenses}
+          {totalExpenses}
         </p>
 
         <p data-testid="header-currency-field">
@@ -37,7 +51,7 @@ class Header extends React.Component {
 
 Header.propTypes = {
   user: PropTypes.string.isRequired,
-  // expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 const mapStateToProps = (state) => ({

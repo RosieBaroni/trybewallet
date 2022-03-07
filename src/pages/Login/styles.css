@@ -16,19 +16,12 @@ main {
 
 h1 {
   display: block;
-  font-size: 2em;
-  font-weight: 500;
-  margin-block-end: 0.67em;
-  margin-block-start: 0.67em;
-  margin-inline-end: 0;
-  margin-inline-start: 0;
 }
 
 .container .content h1 {
   color: #03a86c;
   font-size: 56px;
   margin-bottom: 50px;
-  text-transform: uppercase;
 }
 
 .container , .container .content {
