@@ -14,7 +14,7 @@ const initialState = {
   exchangeRates: {},
 };
 
-class Form extends React.Component {
+class ExpensesForm extends React.Component {
   state = {
     id: 0,
     ...initialState,
@@ -149,7 +149,7 @@ class Form extends React.Component {
   }
 }
 
-Form.propTypes = {
+ExpensesForm.propTypes = {
   expenseInfo: PropTypes.func.isRequired,
 };
 
@@ -157,6 +157,6 @@ const mapDispatchToProps = (dispatch) => ({
   expenseInfo: (expense) => dispatch(addExpense(expense)),
 });
 
-export default connect(null, mapDispatchToProps)(Form);
+export default connect(null, mapDispatchToProps)(ExpensesForm);
 
 /** Source: https://stackoverflow.com/questions/54807454/what-is-prevstate-in-reactjs (prevState - uso no id) */
