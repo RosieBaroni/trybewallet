@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { initialStateHeader } from '../tests/mockData';
 import { addExpense } from '../actions';
 import apiRequest from '../services/fetchApi';
 
@@ -12,7 +11,7 @@ const initialState = {
   currency: 'USD',
   method: 'Dinheiro',
   tag: 'Alimentação',
-  exchangeRates: null,
+  exchangeRates: {},
 };
 
 class Form extends React.Component {
@@ -53,6 +52,7 @@ class Form extends React.Component {
       currency,
       method,
       tag,
+      exchangeRates,
     } = this.state;
 
     return (
@@ -91,11 +91,17 @@ class Form extends React.Component {
               onChange={ this.onInputChange }
               data-testid="currency-input"
             >
-              {initialStateHeader.wallet.currencies.map((curr) => (
-                <option key={ curr } value={ curr }>
-                  {curr}
-                </option>
-              ))}
+              {Object.keys(exchangeRates)
+                .filter((item) => item !== 'USDT')
+                .map((option, index) => (
+                  <option
+                    key={ index }
+                    data-testid={ option }
+                    value={ option }
+                  >
+                    {option}
+                  </option>
+                ))}
             </select>
           </label>
 
@@ -144,16 +150,10 @@ class Form extends React.Component {
 }
 
 Form.propTypes = {
-  // getCurrencies: PropTypes.func.isRequired,
   expenseInfo: PropTypes.func.isRequired,
 };
 
-// const mapStateToProps = ({ wallet }) => ({
-//   currenciesInfo: wallet.currenciesInfo,
-// });
-
 const mapDispatchToProps = (dispatch) => ({
-  // getCurrencies: () => dispatch(fetchCurrencies()),
   expenseInfo: (expense) => dispatch(addExpense(expense)),
 });
 
