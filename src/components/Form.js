@@ -8,7 +8,7 @@ import apiRequest from '../services/fetchApi';
 const initialState = {
   value: '',
   description: '',
-  currency: 'USD',
+  currency: 'EUR',
   method: 'Dinheiro',
   tag: 'Alimentação',
   exchangeRates: {},
