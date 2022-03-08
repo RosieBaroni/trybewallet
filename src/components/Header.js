@@ -3,55 +3,50 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 class Header extends React.Component {
-  state = {
-    totalExpenses: 0,
-  }
+   calculateTotalExpense = () => {
+     const { expenses } = this.props;
 
-  componentDidMount() {
-    this.sumTotalExpense();
-  }
+     const totalExpenses = expenses?.reduce((acc, item) => {
+       const { value, currency, exchangeRates } = item;
 
-  sumTotalExpense = () => {
-    const { expenses } = this.props;
+       acc += value * (exchangeRates[currency].ask);
 
-    const totalExpenses = expenses?.reduce((acc, item) => {
-      const { value, currency, exchangeRates } = item;
+       return acc;
+     }, 0);
 
-      acc += value * (exchangeRates[currency].ask);
+     return totalExpenses.toFixed(2);
+   }
 
-      return acc;
-    }, 0);
+   render() {
+     const { user } = this.props;
 
-    this.setState({ totalExpenses: totalExpenses || 0 });
-  };
+     return (
+       <header>
+         <p data-testid="email-field">
+           Email:
+           {user}
+         </p>
 
-  render() {
-    const { user } = this.props;
-    const { totalExpenses } = this.state;
+         <p data-testid="total-field">
+           Despesas Total:
+           {this.calculateTotalExpense()}
+         </p>
 
-    return (
-      <header>
-        <p data-testid="email-field">
-          Email:
-          {user}
-        </p>
-
-        <p data-testid="total-field">
-          Despesas Total:
-          {totalExpenses}
-        </p>
-
-        <p data-testid="header-currency-field">
-          BRL
-        </p>
-      </header>
-    );
-  }
+         <p data-testid="header-currency-field">
+           BRL
+         </p>
+       </header>
+     );
+   }
 }
+
+Header.defaultProps = {
+  expenses: [],
+};
 
 Header.propTypes = {
   user: PropTypes.string.isRequired,
-  expenses: PropTypes.arrayOf(PropTypes.object).isRequired,
+  expenses: PropTypes.arrayOf(PropTypes.object),
 };
 
 const mapStateToProps = (state) => ({

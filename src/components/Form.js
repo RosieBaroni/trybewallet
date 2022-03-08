@@ -3,17 +3,28 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { initialStateHeader } from '../tests/mockData';
-import { getExpenses, fetchCurrencies } from '../actions';
+import { addExpense } from '../actions';
+import apiRequest from '../services/fetchApi';
+
+const initialState = {
+  value: '',
+  description: '',
+  currency: 'USD',
+  method: 'Dinheiro',
+  tag: 'Alimentação',
+  exchangeRates: null,
+};
 
 class Form extends React.Component {
   state = {
     id: 0,
-    value: '',
-    description: '',
-    currency: 'USD',
-    method: 'Dinheiro',
-    tag: 'Alimentação',
-    exchangeRates: {},
+    ...initialState,
+  }
+
+  async componentDidMount() {
+    const exchangeRates = await apiRequest();
+
+    this.setState({ exchangeRates });
   }
 
   onInputChange = ({ target }) => {
@@ -25,15 +36,14 @@ class Form extends React.Component {
   }
 
   onButtonClick = async () => {
-    const { expenseInfo, getCurrencies } = this.props;
-    const { state } = this.state;
-    const exchangeRates = await getCurrencies();
+    const { expenseInfo } = this.props;
+    const exchangeRates = await apiRequest();
 
     this.setState({ exchangeRates });
 
-    expenseInfo({ ...this.state });
+    expenseInfo(this.state);
 
-    this.setState((prevState) => ({ id: prevState.id + 1, ...state }));
+    this.setState((prevState) => ({ id: prevState.id + 1, ...initialState }));
   }
 
   render() {
@@ -51,14 +61,12 @@ class Form extends React.Component {
           <label htmlFor="value">
             Valor:
             <input
-              type="value"
+              type="number"
               id="value"
               name="value"
-              placeholder="0"
               value={ value }
               onChange={ this.onInputChange }
               data-testid="value-input"
-              required
             />
           </label>
 
@@ -136,13 +144,17 @@ class Form extends React.Component {
 }
 
 Form.propTypes = {
-  getCurrencies: PropTypes.func.isRequired,
+  // getCurrencies: PropTypes.func.isRequired,
   expenseInfo: PropTypes.func.isRequired,
 };
 
+// const mapStateToProps = ({ wallet }) => ({
+//   currenciesInfo: wallet.currenciesInfo,
+// });
+
 const mapDispatchToProps = (dispatch) => ({
-  getCurrencies: () => dispatch(fetchCurrencies()),
-  expenseInfo: (expense) => dispatch(getExpenses(expense)),
+  // getCurrencies: () => dispatch(fetchCurrencies()),
+  expenseInfo: (expense) => dispatch(addExpense(expense)),
 });
 
 export default connect(null, mapDispatchToProps)(Form);
