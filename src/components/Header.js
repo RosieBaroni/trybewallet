@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 class Header extends React.Component {
    calculateTotalExpense = () => {
      const { expenses } = this.props;
+     console.log(expenses);
 
      const totalExpenses = expenses?.reduce((acc, item) => {
        const { value, currency, exchangeRates } = item;
