@@ -65,6 +65,7 @@ input {
   border: 1px solid black;
   border-radius: 8px;
   color: white;
+  cursor: pointer;
   font-size: 20px;
   font-weight: 500;
   margin: 10px;

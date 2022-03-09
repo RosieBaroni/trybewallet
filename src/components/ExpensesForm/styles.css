@@ -1,0 +1,41 @@
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+form {
+  padding: 30px 20px;
+}
+
+.form-expenses {
+  background-color: #73c585;
+  color: #262b33;
+  font-weight: 600;
+}
+
+
+form label input , form label select {
+  background-color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  margin-left: 20px;
+  margin-right: 40px;
+  padding: 10px;
+  width: 150px;
+}
+
+form button {
+  background-color: #007bfe;
+  border: none;
+  border-radius: 8px;
+  color: #eee;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
+  padding: 10px;
+}
+
+/** Source: https://trybe-wallet.surge.sh/ */

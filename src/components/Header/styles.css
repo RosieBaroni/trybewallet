@@ -1,0 +1,26 @@
+header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+}
+
+.user-info {
+  display: flex;
+  font-size: 18px;
+  gap: 50px;
+  grid-gap: 50px;
+}
+
+h1 {
+  color: #03a86c;
+  font-size: 50px;
+  text-transform: uppercase;
+}
+
+p {
+  font-family: sans-serif;
+}
+
+/** Source: https://trybe-wallet.surge.sh/ */
+

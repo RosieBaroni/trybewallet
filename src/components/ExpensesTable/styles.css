@@ -1,0 +1,37 @@
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  color: #262b33;
+  font-size: 18px;
+  width: 100%;
+}
+
+table th {
+  background-color: rgb(240, 235, 235);
+  text-align: left;
+}
+
+table th , table td {
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+table button {
+  border: none;
+  border-radius: 8px;
+  color: #eee;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.button-delete {
+  background-color: red;
+}
+
+.button-edit {
+  background-color: #fcbf06;
+}
+
+/** Source: https://trybe-wallet.surge.sh/ */
