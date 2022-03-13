@@ -24,14 +24,6 @@ class ExpensesTable extends React.Component {
     deleteExpenseDispatch(id);
   }
 
-  // onButtonClickEdit(id) {
-  //   const { editExpenseDispatch } = this.props;
-  //   const { value, description, currency, method, tag, exchangeRates } = this.state;
-  //   const editedExpenses = { value, description, currency, method, tag, exchangeRates };
-
-  //   editExpenseDispatch(id, editedExpenses);
-  // }
-
   render() {
     const { expenses } = this.props;
 
@@ -82,15 +74,6 @@ class ExpensesTable extends React.Component {
                 >
                   Excluir
                 </button>
-
-                {/* <button
-                  className="button-edit"
-                  type="button"
-                  data-testid="edit-btn"
-                  onClick={ () => this.onButtonClickEdit(expense.id) }
-                >
-                  Editar despesa
-                </button> */}
               </td>
             </tr>
           ))}
@@ -113,7 +96,6 @@ const mapStateToProps = ({ wallet }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   deleteExpenseDispatch: (id) => dispatch(deleteExpense(id)),
-  // editExpenseDispatch: (id, editedExpenses) => dispatch(editExpense(id, editedExpenses)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExpensesTable);
