@@ -17,13 +17,6 @@ const wallet = (state = INITIAL_STATE, action) => {
       expenses: state.expenses.filter((expense) => expense.id !== action.payload),
     };
 
-    // case EDIT_EXPENSE:
-    //   return {
-    //     ...state,
-    //     expenses: state.expenses.map((expense) => (expense.id === action.payload
-    //       ? { ...state } : { ...state, expenses: [...action.payload2] })),
-    //   };
-
   case ADD_CURRENCIES:
     return { ...state, currencies: action.payload };
 
